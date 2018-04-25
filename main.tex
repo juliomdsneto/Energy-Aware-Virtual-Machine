@@ -1,0 +1,208 @@
+\documentclass{article}
+\usepackage{sbc-template}
+\usepackage{graphicx,url}
+\usepackage{graphicx}
+\usepackage[brazil]{babel}
+\usepackage{float}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{xcolor}
+\usepackage{xcolor}
+\usepackage{makecell}
+\usepackage[version=4]{mhchem}
+\newcommand\bundz[1]{\textcolor{blue}{\textbf{#1}}}
+
+\sloppy
+\title{Energy-Aware Virtual Machine Scheduling For Cloud Environments: A Survey}
+
+\author{Vitor A. Ataídes\inst{1}, Julio Machado\inst{1}, João V. Oliveira\inst{1} \\ Laércio Pilla\inst{2} and  Maurício L. Pilla\inst{1}}
+
+\address{Centro de Desenvolvimento Tecnológico -- UFPel
+ \nextinstitute
+ University of Genoble
+  \email{\{vataides, jmdsneto, jvvtdo, pilla\}@inf.ufpel.br}
+}  
+
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+    Energy consumed by cloud servers represent 1.2\% of total energy consumed in United States. All this energy consumed by cloud servers represents lots of money spent by cloud owners and lots of \ce{CO2} threw in the environment. These economic and ecological purposes made reduction of energy consumption one of the main challenges of Cloud Computing. An efficient approach to reduce energy consumption is a better use of cloud computational resources. This paper presents a survey towards energy-aware scheduling for cloud environments. 
+\end{abstract}
+
+
+\section{Introduction}
+
+Cloud Computing is a growing computational paradigm whose primary characteristic is a change in the way computational resources are delivered. Changing from a server based approach where the user buys hardware and rents a space in a data center (co-location) to a web-based service where any user can buy computational time by requesting a virtualized instance from a cloud services provider~\cite{NIST:2011}. With this paradigm shift the process of developing and testing innovative ideas does not have to be as expensive as it was before cloud computing. Companies can now get results quicker by using computational scalability (e.g. by using ten times as many servers for a tenth of the time). Moreover it is possible to optimize the cost of computing a specific task by utilizing only the amount of resources needed to execute the computations and then letting go of the rented instances.
+
+Accordingly to \cite{Koomey} energy consumed by cloud servers represent 1.2\% of total energy consumed in United States. All this energy consumed by cloud servers represents lots of money spent by cloud owners and lots of \ce{CO2} threw in the environment. These economic and ecological purposes made reduction of energy consumption one of the main challenges of Cloud Computing. There are some approaches to reduce servers energy consumption. One approach is to organize data centers to better use of refrigeration system since refrigerating represents a significant part of energy consumed by servers. Other approach is to make better use of data center computational resources.
+
+Cloud Servers are responsible to run many Virtual Machines (VMs) for their clients. VMs are allocated inside physical machines and each day thousands of VMs are created, powered on or shut down. The right placement of VMs inside Cloud Server can reduce dramatically its energy consumption, it's called VM Scheduling. This paper presents a survey towards energy-aware scheduling for Cloud Environments, we studied seven papers, identified their main characteristics and compared them.  
+
+\section{Literature Review}
+
+In this section we present a literature review of 7 papers about energy-aware scheduling for Cloud environments:
+
+\cite{bli:2009} presents EnaCloud which is an energy-aware application placement developed in python. The EnaCloud architecture is designed and implemented in the iVIC platform, which is a virtual computing environment developed for Hardware-as-a-Service and Software-as-a-Service applications. This paper split applications in 3 groups: long time applications, compute-intensive applications and common applications and to analyze energy consumption it uses Voltech PM3000 ACE power analyzer. The energy saved by proposed algorithm varies from 10\% to 13\% compared to First Fit and Best Fit algorithms.
+
+\cite{Gregor} presents a new cluster scheduling algorithm to minimize the processor power dissipating by scaling down processor frequencies without drastically increasing the overall virtual machine execution time. This algorithm is implemented in a simulator for DFVS-enabled clusters and an experimental
+multi-core cluster. 
+%http://ieeexplore.ieee.org/document/5289182/authors
+
+\cite{Dzmitry} presents a simulation environment, termed
+GreenCloud, for advanced energy-aware studies of cloud
+computing data centers in realistic setups. GreenCloud is an extension to the network simulator Ns2, which has developed for the study of cloud computing environments. The GreenCloud offers users a detailed fine grained modeling of the energy consumed by the elements of the data center, such as servers, switches, and links. Moreover, GreenCloud offers a thorough investigation of workload distributions. The GreenCloud it's splitted in three energy consumption components: computing energy, communicational energy, and the energy component related to the physical infrastructure of a data center. 
+
+
+\cite{Andrew} presents a framework that represents many promising ways to reduce power consumption, true sustainable development also depends on finding a renewable and reliable energy source for the data center itself. When combined, many of today's limits in the size of data centers will begin to deteriorate. 
+
+\cite{Ghribi} proposes the use of migration algorithms to reduce the energy consumption of the idle servers in cloud computing, putting into sleep mode. The main contribution of this paper is to reduce the number of used services  or equivalently maximize the number of idle servers to put in sleep mode.  They use the classical formulation of Bin-Packing problem,  a linear integer programming algorithm is used to optimize constantly the number of used servers after
+service departures. This migration algorithm is combined with the exact allocation algorithm to reduce overall energy consumption in the data centers. 
+
+\cite{Beloglazov} this paper focus on the first sub-problem approached in \cite{beloglazov2012optimal}, the problem  of  host  overload  detection. Detecting  when  a host  becomes  overloaded  directly  influences  the  QoS, since  if  the  resource  capacity  is  completely  utilized,  it is  highly  likely  that  the  applications  are  experiencing resource  shortage  and  performance  degradation.  What makes  the  problem  of  host  overload  detection  complex is the necessity to optimize the time-averaged behavior of the system, while handling a variety of heterogeneous workloads placed on a single host. To address this problem, most of the current approaches to dynamic VM consolidation  apply  either  heuristic-based  techniques,  such as  static  utilization  threshold decision-making based on statistical analysis of historical data or simply periodic adaptation of the VM allocation .
+
+\cite{Farhad} presents a compartment isolation method  that is effective to reduce the security risks in a shared environment in the event of spreading of Malware. Also, security-aware energy efficient VM consolidation algorithms have been exploited with dynamic VM consolidation algorithms A series of simulation results have been analysed which showed that the Secure Local Regression VM selection method with Minimum Migration Time consolidation algorithm outweighs other secure dynamic algorithms at least by 5\% measuring in the Energy times SLA violation. The solution presents an added protection measure with the minimal impact on energy efficient algorithm.
+
+\section{Discussion}
+By the study of those papers, we identify five characteristics they present:
+
+\begin{description}
+
+    \item[Live Migration:] Live Migration is the process of moving a running VM or application between different physical machines without disconnecting the VM or application. Memory, storage, and network connectivity of the virtual machine are transferred from the original guest machine to the destination. Schedulers can use Live Migration to reorganize VMs inside the cloud while scheduling new VMs. The right  utilization of Live Migrations could reduce power consumption considerably.
+    
+    \item[Algorithm Type:] Algorithm Type could vary from Exact to Heuristic. The choose between these two types of algorithm can impact in energy saving but also in the scheduler scalability.
+    
+    \item[Compared Algorithms:] Each paper proposes an algorithm to schedule VMs, it is relevant to know which algorithm was choose for comparison to have a better understand of energy saved by strategy. 
+    
+    \item[Test Environment:] Test Environment can vary from real Cloud Servers to Cloud Simulations. Environment can have influence in energy consumption results.
+    
+    \item[Energy Saving:] Energy saving is the percentage of energy saved by the scheduler utilization. There is many ways of measure Energy Consumption, some works utilized estimation.
+
+\end{description}
+
+
+
+%\cite{bli:2009} the energy-aware algorithm tries to concentrate workloads to the minimal set of resource nodes. Their abstract it as a classical bin packing problem. But the difference is that in this paper the problem workload may arrive, depart or resize at any time. These three events will happen randomly, and the current one doesn’t know who the successor is. Taking workload arrival event as an example, the new workload should be immediately assigned to a resource node, without the knowledge of subsequent workloads. So our algorithm will work in an event-driven manner and compute an application placement scheme each time when an event happens
+
+
+
+%bli:2009
+%enacloud = live migration + algorithm type (heuristic) +  environment(iVIC cloud) + compared algs(first fit and best fit)
+
+
+%Gregor = algorithm type(exact) + scheduling + environment(a DVFS-enabled cluster) + compared algs(comparou o consumo vários nós computacionais (criando vms) pra ver a diferença de consumo energético)
+
+
+%Ghribi = algorithm type(exact) + scheduling + migration + environment ()
+
+
+%Farhad = algorithm type(exact) + minimum migration (energy saving) + enviroment(CloudSim) + compared algs(DVFS, IQR MC, MAD MMT, LR MU, LR MTT, THR MMT)
+
+%sobre energy saving do Farhad:
+% Different types  of  simulation  setup  and  the subsequent  result  confirms that  there  are  no abrupt  changes  in  power  consumption  to  achieve  security  aware  VM  consolidation.
+
+%buuuuuuut
+
+%The solution is scalable in term  of processing concentration. For example, If VMs are concentrated 19 times higher than the default capacity, secure consolidation could reduce energy waste by 27
+
+
+%greencloud = energy saving + algorithm type(exact) + compared algs (exact vs heuristic) + environment (greencloud)
+
+
+%beloglasov = algorithm type(heuristic) + migration + 
+%environment(amazon cloud (The project provides the data measured every 5 minutes from more than a thousand VMs running in more than 500 locations around the world. For our experiments, we have randomly chosen 10 days from the workload traces collected during March and April) + 
+%compared algs (MHOD algorithm vs. MHOD-OPT \textcolor{red}{e mais uma caralhada})
+
+
+%Younge = energy saving(Therefore, using our power based scheduling algorithm, we conserve 12\%  + algorithm type(exact) + environment(OpenNebula project in a multi-core cluster) + compared algs(number of nodes, 1 to 4)
+
+
+{
+\renewcommand{\arraystretch}{2.5}
+\begin{table}[!htb]
+\centering
+\caption{Comparison of Energy-aware Scheduling Papers}
+\label{tabelamem}
+\begin{tabular}{c c c c c c}
+    \hline
+   \textbf{Papers} & \textbf{\makecell{Live \\ Migration}} & \textbf{\makecell{Algorithm \\ Type}} & \textbf{\makecell{Compared \\ Algorithm}} & \textbf{\makecell{Test \\ Environment}} & \textbf{\makecell{Energy \\ Saved}} \\ \hline
+      \makecell{Bo Li \\ (2009)} & Yes & Heuristic & \makecell{First-Fit \\ Best-Fit} & iVIC cloud & 10\% - 13\% \\ 
+     
+      \makecell{Gregor \\ (2009)}  & No & Exact & \makecell{DVFS-enable \\ Cluster} & \makecell{OpenNebula \\ and DVFS-SIM} & \makecell{Not \\ Applicable} \\
+      
+     
+      \makecell{Dzmitry \\ (2010)}  & No & - & - & \makecell{Simulation} & \makecell{Not \\ Applicable} \\
+     
+      \makecell{Younge \\ (2010)}  & No & Exact & Round Robin & \makecell{OpenNebula} & 12\% \\
+     
+      \makecell{Beloglasov \\ (2013)}  & Yes & Heuristic & Many & \makecell{Cloud Data \\
+Centers} & 12\% \\
+
+      \makecell{Ghribi \\ (2013)} & Yes & Exact & Best-Fit & \makecell{Dedicated \\ Simulator} & \makecell{5.9\% to \\ 41.89\%} \\
+      
+     
+     \makecell{Farhad \\ (2016)} & Yes  & Exact & Many & CloudSim & \makecell{-1.8\% \\ to -1.5\%} \\ \hline
+      
+\end{tabular}
+\end{table}
+
+}
+
+Table 1 shows a classification of each studied paper by the 5 characteristics we presented with papers ordered by publication date. 6 papers proposed VM scheduling algorithms for Cloud environments. \cite{Dzmitry} don't present energy saving, algorithm type and compared algorithm because it doesn't proposed a VM scheduling algorithm but a new environment for cloud simulation called GreenCloud. \cite{Gregor} presents an algorithm for scheduling virtual machines in a computer cluster but didn't compares it to other scheduling algorithms.  
+
+While \cite{bli:2009} proposed an heuristic algorithm and made use of live migration, \cite{Andrew} proposed an exact algorithm with no live migration and got almost the same results on energy saving as \cite{bli:2009}. \cite{Beloglazov} also got the same result on energy save but he made comparison with many scheduling algorithms and tested his solution in real data centers. \cite{Ghribi} made several comparisons of its proposed scheduling algorithm with Best-Fit algorithm, depending on the scenario its energy saving could vary from 5.9\% to 41.89\%. \cite{Farhad} was the only one to increase energy consumption, it was justified by the increase of Cloud security which is the main paper focus. 
+
+
+
+%\section{links}
+%---`Name,environment,algorithmComparison,percentageSaving
+
+
+%vitor- http://ieeexplore.ieee.org/document/5284078/
+%EnaCloud, iVIC, Best-Fit and First-Fit, 10$\%$ to 13$\%$
+%Bo Li
+
+%julio- http://ieeexplore.ieee.org/document/6922463/
+
+%EAMOCA, ????????????????
+%heuristic
+
+%julio- http://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=6546155 
+%Ghribi
+
+%julio- http://ieeexplore.ieee.org/document/5289182/?part=1 %Gregor 
+
+%julio- http://ieeexplore.ieee.org/document/5683561/?part=1 %Dzmitry %https://www.isi.edu/nsnam/ns/
+
+%julio- http://ieeexplore.ieee.org/document/5598294/?section=abstract %Younge escrever esse em casa
+
+%julio- http://ieeexplore.ieee.org/document/7847119 %Farhad
+
+%julio- http://beloglazov.info/papers/2012-ccpe-vm-consolidation-algorithms.pdf
+
+%julio- http://ieeexplore.ieee.org/abstract/document/5598294/ %Younge
+
+%julio- http://beloglazov.info/papers/2013-tpds-managing-overloaded-hosts.pdf
+
+
+%julio- http://ieeexplore.ieee.org/document/6269025/
+
+
+%--levantar características dos papers
+
+
+\section{Conclusion}
+
+Since 2009 there is a great effort on developing energy-aware VM scheduling algorithm. These efforts are motivated by ecological and financial purposes since more energy consumed, more money spent and more \ce{CO2} threw in the environment. This paper analyzed 7 works about energy-aware VM scheduling for Cloud environments, we identify 5 characteristics they have in common and classified each of them by these characteristics. 
+
+Some analyzed papers don't propose VM scheduling algorithm but a simulation environment. The majority of papers proposes an exact algorithm and make use of live migration. Simulation seems to be a great alternative for VM scheduling algorithm development since 3 papers utilized simulators and 1 paper proposed a simulator. 
+
+
+For the future works we will propose a energy-aware algorithm and then compare with the others papers.
+
+%escreve ai sobre trabalhos futuros :| -> desenvolvimento de algoritmos energy-aware e tals
+\bibliographystyle{sbc}
+\bibliography{main}
+\end{document}
